@@ -1,5 +1,5 @@
 import getTicketQuoteInfo
 
 currentPrice = getTicketQuoteInfo.getQuoteInfo("amzn")["Quote Price"]
-print (currentPrice)
+print ("currentPrice:" + currentPrice)
 
