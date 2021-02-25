@@ -20,8 +20,8 @@ else:
 dividendPerShare = tickerQuoteInfo["Forward Dividend & Yield"].split(" ")[0]
 dividendYield = tickerQuoteInfo["Forward Dividend & Yield"].split(" ")[1].replace("(","").replace(")","")
 
-print ("tickerQuoteInfo: " + tickerQuoteInfo)
-print ("tickerStats: " + tickerStats)
+print (tickerQuoteInfo)
+print (tickerStats)
 
 print ("currentPrice: " + str(currentPrice))
 print ("marketCap: " + str(marketCap))
