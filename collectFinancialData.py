@@ -1,6 +1,6 @@
 import moduleYahooFinAPI as finapi
 
-ticker = "amzn"
+ticker = "tatt"
 
 tickerQuoteInfo = finapi.getTickerQuoteTable(ticker)
 tickerStats = finapi.getTickerStats(ticker)
