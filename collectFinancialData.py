@@ -1,4 +1,5 @@
 import moduleYahooFinAPI as finapi
+import moduleUtil as util
 
 ticker = "tatt"
 
@@ -8,17 +9,12 @@ tickerStats = finapi.getTickerStats(ticker)
 currentPrice = tickerQuoteInfo["Quote Price"]
 
 marketCap = tickerQuoteInfo["Market Cap"]
-if marketCap.endswith("T"):
-    marketCap = float(marketCap[:-1]) * 1000000000000 
-elif marketCap.endswith("B"):
-    marketCap = float(marketCap[:-1]) * 1000000000
-elif marketCap.endswith("M"):
-    marketCap = float(marketCap[:-1]) * 1000000
-else: 
-    marketCap = float(marketCap[:-1])
+marketCap = util.readableToFloat(marketCap)
 
 dividendPerShare = tickerQuoteInfo["Forward Dividend & Yield"].split(" ")[0]
-dividendYield = tickerQuoteInfo["Forward Dividend & Yield"].split(" ")[1].replace("(","").replace(")","")
+dividendYield = tickerQuoteInfo["Forward Dividend & Yield"].split(" ")[1].replace("(","").replace(")","") 
+
+bookValue = tickerStats[tickerStats.Attribute == "Book Value Per Share (mrq)"].Value
 
 print (tickerQuoteInfo)
 print (tickerStats)
@@ -27,4 +23,4 @@ print ("currentPrice: " + str(currentPrice))
 print ("marketCap: " + str(marketCap))
 print ("dividendPerShare: " + str(dividendPerShare))
 print ("dividendYield: " + dividendYield)
-
+print ("bookValue: " + bookValue)
