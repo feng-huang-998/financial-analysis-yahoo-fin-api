@@ -1,0 +1,15 @@
+{
+    "ticker": "amzn",
+    "2020-12-31": {
+        "totalCurrentAssets": str(totalCurrentAssets),
+        "totalCurrentLiabilities": str(totalCurrentLiabilities),
+        "longTermDebt": str(longTermDebt),
+        "totalLiabilities": str(totalLiabilities)
+    },
+    "2020-09-30": {
+        "totalCurrentAssets": str(totalCurrentAssets),
+        "totalCurrentLiabilities": str(totalCurrentLiabilities),
+        "longTermDebt": str(longTermDebt),
+        "totalLiabilities": str(totalLiabilities)
+    }
+}
