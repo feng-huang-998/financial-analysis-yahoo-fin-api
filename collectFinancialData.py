@@ -9,6 +9,17 @@ tickerStats = finapi.getTickerStats(ticker)
 tickerIncomeStatement = finapi.getIncomeStatement(ticker)
 tickerBalanceSheet = finapi.getBalanceSheet(ticker)
 
+#tickerIncomeStatement.reset_index(inplace=True)
+#tickerBalanceSheet.reset_index(inplace=True)
+
+print (tickerQuoteInfo)
+print (tickerStats)
+print ("\n")
+print (tickerIncomeStatement)
+print ("\n")
+print (tickerBalanceSheet)
+print ("\n")
+
 currentPrice = tickerQuoteInfo["Quote Price"]
 
 marketCap = tickerQuoteInfo["Market Cap"]
@@ -26,22 +37,15 @@ shareOutstanding = util.readableToFloat(shareOutstanding)
 totalDebtOverEquity = tickerStats.loc[tickerStats["Attribute"]=="Total Debt/Equity (mrq)"]["Value"].values[0]
 currentRatio = tickerStats.loc[tickerStats["Attribute"]=="Current Ratio (mrq)"]["Value"].values[0]
 
-tickerIncomeStatement.reset_index(inplace=True)
-tickerBalanceSheet.reset_index(inplace=True)
+totalCurrentAssets = tickerBalanceSheet.loc["totalCurrentAssets"][datetime.datetime.strptime("2020-12-31 00:00:00", '%Y-%m-%d %H:%M:%S')]
+totalCurrentLiabilities = tickerBalanceSheet.loc["totalCurrentLiabilities"][datetime.datetime.strptime("2020-12-31 00:00:00", '%Y-%m-%d %H:%M:%S')]
+longTermDebt = tickerBalanceSheet.loc["longTermDebt"][datetime.datetime.strptime("2020-12-31 00:00:00", '%Y-%m-%d %H:%M:%S')]
+totalLiabilities = tickerBalanceSheet.loc["totalLiab"][datetime.datetime.strptime("2020-12-31 00:00:00", '%Y-%m-%d %H:%M:%S')]
 
-totalCurrentAssets = tickerBalanceSheet.loc[tickerBalanceSheet["Breakdown"]=="totalCurrentAssets"][datetime.datetime.strptime("2020-12-31 00:00:00", '%Y-%m-%d %H:%M:%S')].values[0]
-totalCurrentLiabilities = tickerBalanceSheet.loc[tickerBalanceSheet["Breakdown"]=="totalCurrentLiabilities"][datetime.datetime.strptime("2020-12-31 00:00:00", '%Y-%m-%d %H:%M:%S')].values[0]
-longTermDebt = tickerBalanceSheet.loc[tickerBalanceSheet["Breakdown"]=="longTermDebt"][datetime.datetime.strptime("2020-12-31 00:00:00", '%Y-%m-%d %H:%M:%S')].values[0]
-totalLiab = tickerBalanceSheet.loc[tickerBalanceSheet["Breakdown"]=="totalLiab"][datetime.datetime.strptime("2020-12-31 00:00:00", '%Y-%m-%d %H:%M:%S')].values[0]
+netIncomeApplicableToCommonShares = tickerIncomeStatement.loc["netIncomeApplicableToCommonShares"][datetime.datetime.strptime("2020-12-31 00:00:00", '%Y-%m-%d %H:%M:%S')]
+latest4YrNetIncomeApplicableToCommonShares = tickerIncomeStatement.loc["netIncomeApplicableToCommonShares"]
 
-print (tickerQuoteInfo)
-print (tickerStats)
-print ("\n")
-#print (tickerIncomeStatement)
-#print ("\n")
-print (tickerBalanceSheet)
-print ("\n")
-
+# Extract everytime of execution -> quote_info
 print ("currentPrice: " + str(currentPrice))
 print ("marketCap: " + str(marketCap))
 print ("dividendPerShare: " + str(dividendPerShare))
@@ -50,8 +54,14 @@ print ("bookValue: " + bookValue)
 print ("shareOutstanding: " + str(shareOutstanding))
 print ("totalDebtOverEquity: " + totalDebtOverEquity)
 print ("PERatio: " + str(PERatio))
+
+# Extract quarterly -> balance_sheet_quarterly 
 print ("currentRatio: " + str(currentRatio))
 print ("totalCurrentAssets: " + str(totalCurrentAssets))
 print ("totalCurrentLiabilities: " + str(totalCurrentLiabilities))
 print ("longTermDebt: " + str(longTermDebt))
-print ("totalLiab: " + str(totalLiab))
+print ("totalLiabilities: " + str(totalLiabilities)) 
+
+# Extract yearly -> income_statement_yearly 
+print ("netIncomeApplicableToCommonShares: " + str(netIncomeApplicableToCommonShares))
+print ("latest4YrNetIncomeApplicableToCommonShares: " + str(latest4YrNetIncomeApplicableToCommonShares))
