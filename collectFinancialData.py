@@ -55,7 +55,7 @@ print ("shareOutstanding: " + str(shareOutstanding))
 print ("totalDebtOverEquity: " + totalDebtOverEquity)
 print ("PERatio: " + str(PERatio))
 
-# Extract quarterly -> balance_sheet_quarterly 
+# Extract quarterly -> balance_sheet_yearly 
 print ("currentRatio: " + str(currentRatio))
 print ("totalCurrentAssets: " + str(totalCurrentAssets))
 print ("totalCurrentLiabilities: " + str(totalCurrentLiabilities))
