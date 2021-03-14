@@ -30,7 +30,7 @@ def extractStockQuoteInfo(ticker):
   totalDebtOverEquity = tickerStats.loc[tickerStats["Attribute"]=="Total Debt/Equity (mrq)"]["Value"].values[0]
   currentRatio = tickerStats.loc[tickerStats["Attribute"]=="Current Ratio (mrq)"]["Value"].values[0]
 
-  # Extract everytime of execution -> stock_quote_info
+  # Extract everytime of execution -> stockQuoteInfo
   print ("currentPrice: " + str(currentPrice))
   print ("marketCap: " + str(marketCap))
   print ("dividendPerShare: " + str(dividendPerShare))
@@ -41,7 +41,7 @@ def extractStockQuoteInfo(ticker):
   print ("PERatio: " + str(PERatio))
   print ("currentRatio: " + str(currentRatio))
 
-  stockQuoteInfoDict = {
+  stockQuoteInfo = {
       "currentPrice": str(currentPrice),
       "marketCap": str(marketCap),
       "dividendPerShare": str(dividendPerShare),
@@ -53,12 +53,7 @@ def extractStockQuoteInfo(ticker):
       "currentRatio": str(currentRatio)
     }
 
-  stockQuoteInfoJson = {
-    "symbol": ticker,
-    "quoteInfo": stockQuoteInfoDict
-  }
-
-  return json.dumps(stockQuoteInfoJson)
+  return stockQuoteInfo
 
 def extractStockBalanceSheetYearly(ticker): 
   tickerBalanceSheet = finapi.getBalanceSheet(ticker)
@@ -69,7 +64,7 @@ def extractStockBalanceSheetYearly(ticker):
   longTermDebt = tickerBalanceSheet.loc["longTermDebt"][datetime.datetime.strptime("2020-12-31 00:00:00", '%Y-%m-%d %H:%M:%S')]
   totalLiabilities = tickerBalanceSheet.loc["totalLiab"][datetime.datetime.strptime("2020-12-31 00:00:00", '%Y-%m-%d %H:%M:%S')]
 
-  # Extract quarterly -> stock_balance_sheet_yearly 
+  # Extract quarterly -> stockBalanceSheetYearly 
   print ("totalCurrentAssets: " + str(totalCurrentAssets))
   print ("totalCurrentLiabilities: " + str(totalCurrentLiabilities))
   print ("longTermDebt: " + str(longTermDebt))
@@ -91,7 +86,7 @@ def extractStockIncomeStatementYearly(ticker):
   netIncomeApplicableToCommonShares = tickerIncomeStatement.loc["netIncomeApplicableToCommonShares"][datetime.datetime.strptime("2020-12-31 00:00:00", '%Y-%m-%d %H:%M:%S')]
   latest4YrNetIncomeApplicableToCommonShares = tickerIncomeStatement.loc["netIncomeApplicableToCommonShares"]
 
-  # Extract yearly -> stock_income_statement_yearly 
+  # Extract yearly -> stockIncomeStatementYearly 
   print ("netIncomeApplicableToCommonShares: " + str(netIncomeApplicableToCommonShares))
   print ("latest4YrNetIncomeApplicableToCommonShares: " + str(latest4YrNetIncomeApplicableToCommonShares))
 
